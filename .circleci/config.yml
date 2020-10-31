@@ -16,8 +16,8 @@ jobs:
       - setup_remote_docker:
           version: 19.03.13
       - run: chmod +x mvnw
-      - run: ./mvnw package -Pnative -Dquarkus.native.container-build=true
+      - run: ./mvnw package -Dquarkus.package.type=uber-jar
       - run: docker login -u ffzs -p $DOCKERHUB_PASSWORD
-      - run: docker build -f src/main/docker/Dockerfile.native -t ffzs/quarkus_demo . && docker push ffzs/quarkus_demo
+      - run: docker build -f src/main/docker/Dockerfile.fast-jar -t ffzs/quarkus_demo . && docker push ffzs/quarkus_demo
 
 
