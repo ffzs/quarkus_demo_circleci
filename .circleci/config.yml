@@ -24,8 +24,9 @@ jobs:
             cd target/quarkus-app
             echo "$PWD"
             ls
-            cp src/main/docker/Dockerfile.fast-jar Dockerfile
-            docker build -t ffzs/quarkus_demo .
-            docker push ffzs/quarkus_demo
+            ls target
+#            cp src/main/docker/Dockerfile.fast-jar Dockerfile
+#            docker build -t ffzs/quarkus_demo .
+#            docker push ffzs/quarkus_demo
 
 
