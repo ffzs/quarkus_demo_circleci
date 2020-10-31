@@ -22,7 +22,7 @@ jobs:
             ./mvnw package
             docker login -u ffzs -p $DOCKERHUB_PASSWORD
             cp src/main/docker/Dockerfile.jvm Dockerfile
-            docker build -t ffzs/quarkus_demo .
-            docker push ffzs/quarkus_demo
+            docker build -t ffzs/quarkus_demo:v1 .
+            docker push ffzs/quarkus_demo:v1
 
 
