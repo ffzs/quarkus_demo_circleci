@@ -14,7 +14,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 19.03.13
       - run:
           name: build docker image
           shell: /bin/bash
@@ -22,9 +21,10 @@ jobs:
             chmod +x mvnw
             ./mvnw package -Dquarkus.package.type=uber-jar
             docker login -u ffzs -p $DOCKERHUB_PASSWORD
+            cd target/quarkus-app
             echo "$PWD"
             cp src/main/docker/Dockerfile.fast-jar Dockerfile
-            docker build -t ffzs/quarkus_demo /home/circleci/project
+            docker build -t ffzs/quarkus_demo .
             docker push ffzs/quarkus_demo
 
 

@@ -47,10 +47,10 @@ ENV JAVA_OPTIONS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jb
 
 # We make four distinct layers so if there are application changes the library layers can be re-used
 WORKDIR /home/circleci/project
-COPY --chown=1001 target/quarkus-app/lib/ /deployments/lib/
-COPY --chown=1001 target/quarkus-app/*.jar /deployments/
-COPY --chown=1001 target/quarkus-app/app/ /deployments/app/
-COPY --chown=1001 target/quarkus-app/quarkus/ /deployments/quarkus/
+COPY --chown=1001 lib/ /deployments/lib/
+COPY --chown=1001 *.jar /deployments/
+COPY --chown=1001 app/ /deployments/app/
+COPY --chown=1001 quarkus/ /deployments/quarkus/
 
 EXPOSE 8080
 USER 1001
