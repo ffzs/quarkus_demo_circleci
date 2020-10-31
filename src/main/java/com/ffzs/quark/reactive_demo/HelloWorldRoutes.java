@@ -12,12 +12,11 @@ import java.net.UnknownHostException;
  * @Date: 2020/10/31 下午6:32
  */
 
-@RouteBase(path = "/", produces = "application/json")
+@RouteBase(path = "/hello")
 public class HelloWorldRoutes {
 
     @Route(methods = HttpMethod.GET, path = "/")
     public Uni<String> getAll() throws UnknownHostException {
-        return Uni.createFrom().item("Hello world" + InetAddress.getLocalHost().toString());
+        return Uni.createFrom().item("Hello world: " + InetAddress.getLocalHost().toString());
     }
-
 }
