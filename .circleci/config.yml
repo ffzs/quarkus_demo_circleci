@@ -8,7 +8,7 @@ jobs:
       - image: circleci/openjdk:11-jdk-stretch
         environment:
           POSTGRE_HOST: localhost
-      - image: quay.io/quarkus/ubi-quarkus-native-image:20.2.0-java11
+      - image: circleci/ubi-quarkus-native-image:20.2.0-java11
       - image: circleci/postgres:10.5
         auth:
           username: ffzs
