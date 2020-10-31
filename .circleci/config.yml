@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  build:
+
+    working_directory: ~/quarkus_circleci
+
+    docker:
+      - image: circleci/openjdk:11-jdk-stretch
+      - image: circleci/postgres:10.5
+        environment:
+          POSTGRES_USER: ffzs
+          POSTGRES_PASSWORD: 123zxc
+          POSTGRES_DB: mydb
+
+    steps:
+      - checkout
+      - restore_cache:
+          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
+      - run: ./mvnw package -Pnative -Dquarkus.native.container-build=true
+
+      - store_artifacts:
+          path: target/quarkus_demo-1.0.0-SNAPSHOT-runner
+
