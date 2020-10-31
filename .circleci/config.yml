@@ -9,9 +9,6 @@ jobs:
         environment:
           POSTGRE_HOST: localhost
       - image: quay.io/quarkus/ubi-quarkus-native-image:20.2.0-java11
-        auth:
-          username: ffzs
-          password: $DOCKERHUB_PASSWORD
       - image: circleci/postgres:10.5
         auth:
           username: ffzs
