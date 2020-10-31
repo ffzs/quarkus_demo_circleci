@@ -19,14 +19,10 @@ jobs:
           shell: /bin/bash
           command: |
             chmod +x mvnw
-            ./mvnw package -Dquarkus.package.type=uber-jar
+            ./mvnw package
             docker login -u ffzs -p $DOCKERHUB_PASSWORD
-            cd target/quarkus-app
-            echo "$PWD"
-            ls
-            ls target
-#            cp src/main/docker/Dockerfile.fast-jar Dockerfile
-#            docker build -t ffzs/quarkus_demo .
-#            docker push ffzs/quarkus_demo
+            cp src/main/docker/Dockerfile.jvm Dockerfile
+            docker build -t ffzs/quarkus_demo .
+            docker push ffzs/quarkus_demo
 
 
