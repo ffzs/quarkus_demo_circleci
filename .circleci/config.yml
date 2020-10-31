@@ -1,9 +1,6 @@
 version: 2
 jobs:
   build:
-
-    working_directory: ~/quarkus_demo_circleci
-
     docker:
       - image: circleci/openjdk:11-jdk-stretch
         environment:
@@ -16,8 +13,6 @@ jobs:
 
     steps:
       - checkout
-      - restore_cache:
-          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       - setup_remote_docker:
           version: 19.03.13
       - run: chmod +x mvnw
