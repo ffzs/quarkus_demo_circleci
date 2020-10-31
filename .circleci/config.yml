@@ -15,9 +15,14 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 19.03.13
-      - run: chmod +x mvnw
-      - run: ./mvnw package -Dquarkus.package.type=uber-jar
-      - run: docker login -u ffzs -p $DOCKERHUB_PASSWORD
-      - run: docker build -f src/main/docker/Dockerfile.fast-jar -t ffzs/quarkus_demo . && docker push ffzs/quarkus_demo
+      - run:
+          name: build
+          shell: /bin/bash
+          command: |
+            chmod +x mvnw
+            ./mvnw package -Dquarkus.package.type=uber-jar
+            docker login -u ffzs -p $DOCKERHUB_PASSWORD
+            echo "$PWD"
+            docker build -f src/main/docker/Dockerfile.jvm -t ffzs/quarkus_demo . && docker push ffzs/quarkus_demo
 
 
