@@ -10,9 +10,6 @@ jobs:
           POSTGRE_HOST: localhost
       - image: quay.io/quarkus/ubi-quarkus-native-image:20.2.0-java11
       - image: circleci/postgres:10.5
-        auth:
-          username: ffzs
-          password: $DOCKERHUB_PASSWORD
         environment:
           POSTGRES_USER: ffzs
           POSTGRES_PASSWORD: 123zxc
@@ -22,11 +19,11 @@ jobs:
       - checkout
       - restore_cache:
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run: chmod +x mvnw
-      - run: ./mvnw package -Pnative -Dquarkus.native.container-build=true
+      - run: ./mvnw package -Dquarkus.package.type=uber-jar
+      - run: docker login -u ffzs -p $DOCKERHUB_PASSWORD
+      - run: docker build -f src/main/docker/Dockerfile.jvm -t ffzs/quarkus_demo . && docker push ffzs/quarkus_demo
 
       - store_artifacts:
-          path: target/quarkus_demo-1.0.0-SNAPSHOT-runner
+          path: target/create_demo-1.0.0-SNAPSHOT-runner.jar
 
