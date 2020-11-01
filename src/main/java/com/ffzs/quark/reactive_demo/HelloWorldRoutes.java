@@ -1,5 +1,6 @@
 package com.ffzs.quark.reactive_demo;
 
+import io.quarkus.vertx.web.Param;
 import io.quarkus.vertx.web.Route;
 import io.quarkus.vertx.web.RouteBase;
 import io.smallrye.mutiny.Uni;
@@ -15,8 +16,8 @@ import java.net.UnknownHostException;
 @RouteBase(path = "/hello")
 public class HelloWorldRoutes {
 
-    @Route(methods = HttpMethod.GET, path = "/")
-    public Uni<String> getAll() throws UnknownHostException {
-        return Uni.createFrom().item("Hello world: " + InetAddress.getLocalHost().toString());
+    @Route(methods = HttpMethod.GET, path = "/:id")
+    public Uni<String> hello(@Param String id) throws UnknownHostException {
+        return Uni.createFrom().item("[No." + id + "] Hello world: " + InetAddress.getLocalHost().toString());
     }
 }
